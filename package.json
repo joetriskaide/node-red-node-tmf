@@ -7,7 +7,7 @@
     "keywords": [ "tele management forum", "tmf","api economy" ],
     "node-red"     : {
         "nodes": {
-			"node-red-tmf-api":"node-red-tmf-api.js"        
+			"node-red-node-tmf-api":"node-red-node-tmf-api.js"        
         }
     },
       "repository": {
