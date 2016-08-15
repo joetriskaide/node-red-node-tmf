@@ -1,0 +1,822 @@
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-customermanagement',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSCustomerManagement/api/customerManagement/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-customermanagement.png",
+    	label: function() {
+        	return this.name||"Customer Management";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-customermanagement">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"post", "p":"/customer"}'>customerCreate</option>
+            <option value='{"m":"get", "p":"/customer"}'>customerFind</option>
+            <option value='{"m":"delete", "p":"/customer"}'>customerDelete</option>
+            <option value='{"m":"get", "p":"/customer"}'>customerGet</option>
+            <option value='{"m":"patch", "p":"/customer"}'>customerPatch</option>
+            <option value='{"m":"put", "p":"/customer"}'>customerUpdate</option>
+            <option value='{"m":"post", "p":"/customerAccount"}'>customerAccountCreate</option>
+            <option value='{"m":"get", "p":"/customerAccount"}'>customerAccountFind</option>
+            <option value='{"m":"delete", "p":"/customerAccount"}'>customerAccountDelete</option>
+            <option value='{"m":"get", "p":"/customerAccount"}'>customerAccountGet</option>
+            <option value='{"m":"patch", "p":"/customerAccount"}'>customerAccountPatch</option>
+            <option value='{"m":"put", "p":"/customerAccount"}'>customerAccountUpdate</option>
+            <option value='{"m":"post", "p":"/paymentMean"}'>paymentMeanCreate</option>
+            <option value='{"m":"get", "p":"/paymentMean"}'>paymentMeanFind</option>
+            <option value='{"m":"delete", "p":"/paymentMean"}'>paymentMeanDelete</option>
+            <option value='{"m":"get", "p":"/paymentMean"}'>paymentMeanGet</option>
+            <option value='{"m":"patch", "p":"/paymentMean"}'>paymentMeanPatch</option>
+            <option value='{"m":"put", "p":"/paymentMean"}'>paymentMeanUpdate</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-customermanagement">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('product-catalog-management',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSProductCatalog/api/catalogManagement/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "product-catalog-management.png",
+    	label: function() {
+        	return this.name||"Product  Catalog  Management";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="product-catalog-management">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"get", "p":"/category"}'>List or find 'Category' objects</option>
+            <option value='{"m":"post", "p":"/category"}'>Creates a 'Category'</option>
+            <option value='{"m":"get", "p":"/category"}'>Retrieves a 'Category' by Id</option>
+            <option value='{"m":"put", "p":"/category"}'>Updates a 'Category' by Id</option>
+            <option value='{"m":"patch", "p":"/category"}'>Updates partially a 'Category' by Id</option>
+            <option value='{"m":"get", "p":"/productOffering"}'>List or find 'ProductOffering' objects</option>
+            <option value='{"m":"post", "p":"/productOffering"}'>Creates a 'ProductOffering'</option>
+            <option value='{"m":"get", "p":"/productOffering"}'>Retrieves a 'ProductOffering' by Id</option>
+            <option value='{"m":"put", "p":"/productOffering"}'>Updates a 'ProductOffering' by Id</option>
+            <option value='{"m":"patch", "p":"/productOffering"}'>Updates partially a 'ProductOffering' by Id</option>
+            <option value='{"m":"get", "p":"/productSpecification"}'>List or find 'ProductSpecification' objects</option>
+            <option value='{"m":"post", "p":"/productSpecification"}'>Creates a 'ProductSpecification'</option>
+            <option value='{"m":"get", "p":"/productSpecification"}'>Retrieves a 'ProductSpecification' by Id</option>
+            <option value='{"m":"put", "p":"/productSpecification"}'>Updates a 'ProductSpecification' by Id</option>
+            <option value='{"m":"patch", "p":"/productSpecification"}'>Updates partially a 'ProductSpecification' by Id</option>
+            <option value='{"m":"post", "p":"/hub"}'>Register a listener</option>
+            <option value='{"m":"delete", "p":"/hub"}'>Unregister a listener</option>
+            <option value='{"m":"post", "p":"/listener/catalogChangeBatchNotification"}'>Publishes a 'CatalogChangeBatchNotification'</option>
+            <option value='{"m":"post", "p":"/listener/catalogChangeNotification"}'>Publishes a 'CatalogChangeNotification'</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="product-catalog-management">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-partymanagement',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSPartyManagement/api/partyManagement/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-partymanagement.png",
+    	label: function() {
+        	return this.name||"Party Management";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-partymanagement">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"post", "p":"/individual"}'>individualCreate</option>
+            <option value='{"m":"get", "p":"/individual"}'>individualFind</option>
+            <option value='{"m":"delete", "p":"/individual"}'>individualDelete</option>
+            <option value='{"m":"get", "p":"/individual"}'>individualGet</option>
+            <option value='{"m":"patch", "p":"/individual"}'>individualPatch</option>
+            <option value='{"m":"put", "p":"/individual"}'>individualUpdate</option>
+            <option value='{"m":"post", "p":"/organization"}'>organizationCreate</option>
+            <option value='{"m":"get", "p":"/organization"}'>organizationFind</option>
+            <option value='{"m":"get", "p":"/organization"}'>organizationGet</option>
+            <option value='{"m":"patch", "p":"/organization"}'>organizationPatch</option>
+            <option value='{"m":"put", "p":"/organization"}'>organizationUpdate</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-partymanagement">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-productinventory',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSProductInventory/api/productInventory/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-productinventory.png",
+    	label: function() {
+        	return this.name||"Product Inventory";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-productinventory">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"post", "p":"/product"}'>productCreate</option>
+            <option value='{"m":"get", "p":"/product"}'>productFind</option>
+            <option value='{"m":"delete", "p":"/product"}'>productDelete</option>
+            <option value='{"m":"get", "p":"/product"}'>productGet</option>
+            <option value='{"m":"patch", "p":"/product"}'>productPatch</option>
+            <option value='{"m":"put", "p":"/product"}'>productUpdate</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-productinventory">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-productordering',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSProductOrdering/api/productOrdering/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-productordering.png",
+    	label: function() {
+        	return this.name||"Product Ordering";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-productordering">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"get", "p":"/productOrder"}'>productOrderFind</option>
+            <option value='{"m":"post", "p":"/productOrder"}'>productOrderInCreate</option>
+            <option value='{"m":"get", "p":"/productOrder"}'>productOrderGet</option>
+            <option value='{"m":"patch", "p":"/productOrder"}'>productOrderPatch</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-productordering">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-slamanagement',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSLAManagement/api/slaManagement/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-slamanagement.png",
+    	label: function() {
+        	return this.name||"Sla Management";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-slamanagement">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"post", "p":"/sla"}'>slaCreate</option>
+            <option value='{"m":"get", "p":"/sla"}'>slaFind</option>
+            <option value='{"m":"delete", "p":"/sla"}'>slaDelete</option>
+            <option value='{"m":"get", "p":"/sla"}'>slaGet</option>
+            <option value='{"m":"patch", "p":"/sla"}'>slaPatch</option>
+            <option value='{"m":"put", "p":"/sla"}'>slaUpdate</option>
+            <option value='{"m":"post", "p":"/slaViolation"}'>slaViolationCreate</option>
+            <option value='{"m":"get", "p":"/slaViolation"}'>slaViolationFind</option>
+            <option value='{"m":"delete", "p":"/slaViolation"}'>slaViolationDelete</option>
+            <option value='{"m":"get", "p":"/slaViolation"}'>slaViolationGet</option>
+            <option value='{"m":"patch", "p":"/slaViolation"}'>slaViolationPatch</option>
+            <option value='{"m":"put", "p":"/slaViolation"}'>slaViolationUpdate</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-slamanagement">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-troubleticket',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSTroubleTicket/api/troubleTicketManagement/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-troubleticket.png",
+    	label: function() {
+        	return this.name||"Trouble Ticket";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-troubleticket">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"post", "p":"/troubleTicket"}'>troubleTicketCreate</option>
+            <option value='{"m":"get", "p":"/troubleTicket"}'>troubleTicketFind</option>
+            <option value='{"m":"get", "p":"/troubleTicket"}'>troubleTicketGet</option>
+            <option value='{"m":"patch", "p":"/troubleTicket"}'>troubleTicketPatch</option>
+            <option value='{"m":"put", "p":"/troubleTicket"}'>troubleTicketUpdate</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-troubleticket">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-usagemanagement',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSUsageManagement/api/usageManagement/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-usagemanagement.png",
+    	label: function() {
+        	return this.name||"Usage Management";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-usagemanagement">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"post", "p":"/usage"}'>usageCreate</option>
+            <option value='{"m":"delete", "p":"/usage"}'>usageDelete</option>
+            <option value='{"m":"get", "p":"/usage"}'>usageGet</option>
+            <option value='{"m":"put", "p":"/usage"}'>usageUpdate</option>
+            <option value='{"m":"post", "p":"/usageSpecification"}'>usageSpecificationCreate</option>
+            <option value='{"m":"delete", "p":"/usageSpecification"}'>usageSpecificationDelete</option>
+            <option value='{"m":"get", "p":"/usageSpecification"}'>usageSpecificationGet</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-usagemanagement">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
+/*
+ * This is generated code as of Mon Aug 15 2016 18:35:20 GMT+0200 (W. Europe Daylight Time)
+ */
+<!--
+  Copyright 2014,2016 IBM Corp.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+
+
+
+
+
+
+
+<!--
+   Put this file under the "nodes" directory in your NODES-RED project and restart the app.
+   yaml2node initial version written by Josef.reisinger@de.ibm.com
+-->
+
+<script type="text/javascript">
+
+    /*globals RED */
+    RED.nodes.registerType('api-billingmanagement',{
+        category: 'TMF API',
+        color: '#b7ccd0',
+        inputs:1,
+        outputs:1,
+        defaults: {
+	        hostname: { value: "api.eu.apiconnect.ibmcloud.com" },
+	        baseurl: { value: "/tmforum-apidev/tmfcatalog/DSBillingManagement/api/billingManagement/v2" },
+	        method: { value: "", required:true},
+	        name: {value: null}
+    	},
+    	icon: "api-billingmanagement.png",
+    	label: function() {
+        	return this.name||"Billing Management";
+    	}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="api-billingmanagement">
+    <div class="form-row">
+
+    <br/>
+    <label for="node-input-method"><i class="icon-tag"></i>API Call</label>
+    <select id="node-input-method" placeholder="Select the API call from list">
+            <option value='{"m":"post", "p":"/billingAccount"}'>billingAccountCreate</option>
+            <option value='{"m":"get", "p":"/billingAccount"}'>billingAccountFind</option>
+            <option value='{"m":"get", "p":"/billingAccount"}'>billingAccountGet</option>
+            <option value='{"m":"patch", "p":"/billingAccount"}'>billingAccountPatch</option>
+            <option value='{"m":"get", "p":"/customerBillingCycleSpecification"}'>customerBillingCycleSpecificationFind</option>
+            <option value='{"m":"get", "p":"/customerBillingCycleSpecification"}'>customerBillingCycleSpecificationGet</option>
+            <option value='{"m":"post", "p":"/appliedCustomerBillingCharge"}'>appliedCustomerBillingChargeCreate</option>
+            <option value='{"m":"get", "p":"/appliedCustomerBillingCharge"}'>appliedCustomerBillingChargeFind</option>
+            <option value='{"m":"get", "p":"/appliedCustomerBillingCharge"}'>appliedCustomerBillingChargeGet</option>
+            <option value='{"m":"get", "p":"/settlementNoteAdvice"}'>settlementNoteAdviceFind</option>
+            <option value='{"m":"get", "p":"/settlementNoteAdvice"}'>settlementNoteAdviceGet</option>
+            <option value='{"m":"get", "p":"/customerBillFormat"}'>customerBillFormatFind</option>
+            <option value='{"m":"get", "p":"/customerBillFormat"}'>customerBillFormatGet</option>
+            <option value='{"m":"get", "p":"/customerBillPresentationMedia"}'>customerBillPresentationMediaFind</option>
+            <option value='{"m":"get", "p":"/customerBillPresentationMedia"}'>customerBillPresentationMediaGet</option>
+            <option value='{"m":"post", "p":"/hub"}'>hubCreate</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubFind</option>
+            <option value='{"m":"delete", "p":"/hub"}'>hubDelete</option>
+            <option value='{"m":"get", "p":"/hub"}'>hubGet</option>
+
+	</select>
+	<hr/>
+
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="api-billingmanagement">
+<p>This Node implements the API for <a href="http://projects.tmforum.org/wiki/display/API/Open+API+Table";">tmfapiname</a> of TMF</p>
+The node uses <code>msg.payload.id</code> for calls where the id of a resource is needed. <br/>
+The caller may limit the number of fields returned by the call as comma-separated list in <code>msg.payload.fields</code>. Filter 
+queries are taken as <code>field=value</code> pairs from <code>msg.payload.filter</code>. <br/>
+Data to be written in Create/Update Operations are provided in <code>msg.payload.body</code><br/>
+If additional headers a required, put them in <br/>
+<code>msg.header[]</code> array as <br/><code>msg.header['Content-Type']='application/json"</code>.<br/>
+The nodes <i>do not</i> verify parameters to avoid inconsistent behavior between the API implementation and the logic of the NODE-RED node.
+<br/><br/>
+The node returnes the API result body in <code>msg.payload</code> with the status of the http request in <code>msg.status</code><br/>
+
+</script>
