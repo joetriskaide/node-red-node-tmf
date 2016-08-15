@@ -7,7 +7,7 @@
     "keywords": [ "tele management forum", "tmf","api economy" ],
     "node-red"     : {
         "nodes": {
-			"node-red-tmf-api-beta":"node-red-tmf-api-beta.js"        
+			"node-red-tmf-api":"node-red-tmf-api.js"        
         }
     },
       "repository": {
@@ -24,7 +24,7 @@
   "maintainers": [
     {
       "name": "Josef Reisinger",
-      "email": "osef.reisinger@de.ibm.com"
+      "email": "Josef.reisinger@de.ibm.com"
     }
   ]
 }
